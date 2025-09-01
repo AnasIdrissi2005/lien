@@ -20,16 +20,32 @@
             --dark: #0f0c29;
             --light: #ffffff;
             --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        /* Light Theme Variables */
+        body.light-theme {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff3e7f;
+            --dark: #f8f9fa;
+            --light: #212529;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --text-primary: #212529;
+            --text-secondary: rgba(0, 0, 0, 0.7);
+            --bg-primary: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, #302b63 50%, #24243e 100%);
-            color: var(--light);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            transition: font-family 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         body.en {
@@ -37,12 +53,45 @@
             direction: ltr;
         }
 
-        /* Language Toggle */
-        .lang-toggle {
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 9999;
+        }
+
+        body.light-theme .progress-bar {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Language & Theme Toggles */
+        .controls {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1001;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        body.en .controls {
+            right: auto;
+            left: 20px;
+        }
+
+        .lang-toggle, .theme-toggle {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -53,12 +102,12 @@
             gap: 5px;
         }
 
-        body.en .lang-toggle {
-            right: auto;
-            left: 20px;
+        body.light-theme .lang-toggle,
+        body.light-theme .theme-toggle {
+            border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
-        .lang-option {
+        .lang-option, .theme-btn {
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
@@ -66,13 +115,14 @@
             font-weight: 500;
             border: none;
             background: transparent;
-            color: var(--light);
+            color: var(--text-primary);
             font-size: 0.9rem;
         }
 
-        .lang-option.active {
+        .lang-option.active, .theme-btn.active {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             box-shadow: 0 2px 10px rgba(106, 17, 203, 0.3);
+            color: white;
         }
 
         /* Header */
@@ -85,6 +135,12 @@
             padding: 1rem 5%;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .header-container {
@@ -113,7 +169,7 @@
         }
 
         nav a {
-            color: var(--light);
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -142,12 +198,40 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        /* Hero Section with Parallax */
         .hero {
             margin-top: 80px;
-            padding: 4rem 5%;
+            padding: 6rem 5%;
             text-align: center;
             position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 12, 41, 0.7);
+            z-index: 1;
+        }
+
+        body.light-theme .hero::before {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -156,14 +240,7 @@
             background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient 8s ease infinite;
-            background-size: 200% auto;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            min-height: 1.2em;
         }
 
         .hero p {
@@ -171,6 +248,18 @@
             max-width: 700px;
             margin: 0 auto 3rem;
             opacity: 0.9;
+            color: var(--text-secondary);
+        }
+
+        /* Typewriter cursor */
+        .typewriter::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         /* Main Links Section */
@@ -193,6 +282,10 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+        }
+
+        body.light-theme .link-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .link-card::before {
@@ -228,12 +321,14 @@
         .link-title {
             font-size: 2rem;
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
         .link-description {
             opacity: 0.8;
             margin-bottom: 2rem;
             line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         .link-url {
@@ -244,6 +339,11 @@
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             word-break: break-all;
+            color: var(--text-secondary);
+        }
+
+        body.light-theme .link-url {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .link-btn {
@@ -288,11 +388,84 @@
             box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
         }
 
+        /* Recent Projects Section */
+        .recent-projects {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-theme .project-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background: rgba(106, 17, 203, 0.2);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
         /* Stats Section */
         .stats-section {
             padding: 4rem 5%;
             background: rgba(0, 0, 0, 0.2);
             margin: 4rem 0;
+        }
+
+        body.light-theme .stats-section {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .stats-container {
@@ -318,7 +491,62 @@
         }
 
         .stat-label {
-            opacity: 0.8;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Map Section */
+        .skills-map {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-bubble {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        body.light-theme .skill-bubble {
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-bubble:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        .skill-bubble span {
+            font-weight: 600;
+            color: var(--text-primary);
+            z-index: 2;
+            position: relative;
+        }
+
+        .bubble-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, transparent, var(--primary));
+            border-radius: 50%;
+            transition: height 0.5s ease;
         }
 
         /* Skills Section */
@@ -352,15 +580,44 @@
             transition: all 0.3s ease;
         }
 
+        body.light-theme .skill-item {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         .skill-item:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.08);
+        }
+
+        body.light-theme .skill-item:hover {
+            background: rgba(0, 0, 0, 0.05);
         }
 
         .skill-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent);
+        }
+
+        /* Python Icon Special Style */
+        .python-icon {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .python-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: -1;
         }
 
         /* Godot Icon Special Style */
@@ -406,14 +663,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--light);
+            color: var(--text-primary);
             font-size: 1.5rem;
             transition: all 0.3s ease;
+        }
+
+        body.light-theme .social-link {
+            border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .social-link:hover {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             transform: translateY(-5px);
+            color: white;
         }
 
         /* Floating Elements */
@@ -468,12 +730,80 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        }
+
+        body.light-theme .notification {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.success {
+            border-color: #4caf50;
+        }
+
+        .notification.error {
+            border-color: #f44336;
+        }
+
+        .notification i {
+            font-size: 1.5rem;
+        }
+
+        .notification.success i {
+            color: #4caf50;
+        }
+
+        .notification.error i {
+            color: #f44336;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+        }
+
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 4rem;
+        }
+
+        body.light-theme footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         /* Responsive Design */
@@ -494,12 +824,13 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .lang-toggle {
+            .controls {
                 top: 10px;
                 right: 10px;
+                flex-direction: column;
             }
             
-            body.en .lang-toggle {
+            body.en .controls {
                 right: auto;
                 left: 10px;
             }
@@ -507,10 +838,25 @@
     </style>
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-        <button class="lang-option active" data-lang="ar">عربي</button>
-        <button class="lang-option" data-lang="en">EN</button>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+
+    <!-- Language & Theme Toggles -->
+    <div class="controls">
+        <div class="lang-toggle">
+            <button class="lang-option active" data-lang="ar">عربي</button>
+            <button class="lang-option" data-lang="en">EN</button>
+        </div>
+        <div class="theme-toggle">
+            <button class="theme-btn active" data-theme="dark">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="theme-btn" data-theme="light">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Floating Background Elements -->
@@ -530,19 +876,22 @@
             <nav>
                 <ul>
                     <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
-                    <li><a href="#about" data-ar="من أنا" data-en="About">من أنا</a></li>
+                    <li><a href="#projects" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
                     <li><a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+                    <li><a href="#contact" data-ar="اتصل" data-en="Contact">اتصل</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Parallax -->
     <section class="hero" id="home">
-        <h1 data-ar="مرحباً في عالمي الرقمي" data-en="Welcome to My Digital World">مرحباً في عالمي الرقمي</h1>
-        <p data-ar="أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا" 
-           data-en="I'm a passionate developer and designer, offering creative and innovative solutions in the world of technology">
-           أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا</p>
+        <div class="hero-content">
+            <h1 class="typewriter" data-ar="مرحباً في عالمي الرقمي" data-en="Welcome to My Digital World">مرحباً في عالمي الرقمي</h1>
+            <p data-ar="أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا" 
+               data-en="I'm a passionate developer and designer, offering creative and innovative solutions in the world of technology">
+               أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا</p>
+        </div>
     </section>
 
     <!-- Main Links Section -->
@@ -576,6 +925,63 @@
         </div>
     </section>
 
+    <!-- Recent Projects Section -->
+    <section class="recent-projects" id="projects">
+        <h2 class="section-title" data-ar="آخر المشاريع" data-en="Recent Projects">آخر المشاريع</h2>
+        <div class="projects-slider">
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="project-content">
+                    <h3 data-ar="متجر إلكتروني" data-en="E-commerce Store">متجر إلكتروني</h3>
+                    <p data-ar="منصة تجارة إلكترونية متكاملة مع نظام دفع آمن" 
+                       data-en="Complete e-commerce platform with secure payment system">
+                       منصة تجارة إلكترونية متكاملة مع نظام دفع آمن</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="project-content">
+                    <h3 data-ar="لعبة الهروب" data-en="Escape Game">لعبة الهروب</h3>
+                    <p data-ar="لعبة ألغاز ثلاثية الأبعاد مبنية بمحرك Godot" 
+                       data-en="3D puzzle game built with Godot engine">
+                       لعبة ألغاز ثلاثية الأبعاد مبنية بمحرك Godot</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Godot</span>
+                        <span class="project-tag">3D</span>
+                        <span class="project-tag">GDScript</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-image">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="project-content">
+                    <h3 data-ar="لوحة تحليل البيانات" data-en="Data Dashboard">لوحة تحليل البيانات</h3>
+                    <p data-ar="لوحة تحكم تفاعلية لتحليل وعرض البيانات في الوقت الفعلي" 
+                       data-en="Interactive dashboard for real-time data analysis and visualization">
+                       لوحة تحكم تفاعلية لتحليل وعرض البيانات في الوقت الفعلي</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Pandas</span>
+                        <span class="project-tag">Matplotlib</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="stats-container">
@@ -594,6 +1000,33 @@
             <div class="stat-card">
                 <div class="stat-number">24/7</div>
                 <div class="stat-label" data-ar="دعم فني" data-en="Support">دعم فني</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Map Section -->
+    <section class="skills-map">
+        <h2 class="section-title" data-ar="خريطة المهارات" data-en="Skills Map">خريطة المهارات</h2>
+        <div class="skills-visualization">
+            <div class="skill-bubble" data-skill="HTML5" data-level="95">
+                <span>HTML5</span>
+                <div class="bubble-fill" style="height: 95%;"></div>
+            </div>
+            <div class="skill-bubble" data-skill="CSS3" data-level="90">
+                <span>CSS3</span>
+                <div class="bubble-fill" style="height: 90%;"></div>
+            </div>
+            <div class="skill-bubble" data-skill="JavaScript" data-level="85">
+                <span>JavaScript</span>
+                <div class="bubble-fill" style="height: 85%;"></div>
+            </div>
+            <div class="skill-bubble" data-skill="Python" data-level="80">
+                <span>Python</span>
+                <div class="bubble-fill" style="height: 80%;"></div>
+            </div>
+            <div class="skill-bubble" data-skill="Godot" data-level="70">
+                <span>Godot</span>
+                <div class="bubble-fill" style="height: 70%;"></div>
             </div>
         </div>
     </section>
@@ -618,7 +1051,6 @@
                 <i class="fab fa-python skill-icon"></i>
                 <h3>Python</h3>
             </div>
-
             <div class="skill-item">
                 <i class="fas fa-cube skill-icon godot-icon"></i>
                 <h3>Godot</h3>
@@ -627,7 +1059,7 @@
     </section>
 
     <!-- Social Links -->
-    <section class="social-section">
+    <section class="social-section" id="contact">
         <h2 class="section-title" data-ar="تابعني على" data-en="Follow Me On">تابعني على</h2>
         <div class="social-links">
             <a href="#" class="social-link" title="GitHub">
@@ -669,6 +1101,7 @@
                 const lang = option.getAttribute('data-lang');
                 setLanguage(lang);
                 localStorage.setItem('selectedLang', lang);
+                showNotification(lang === 'ar' ? 'تم تغيير اللغة إلى العربية' : 'Language changed to English', 'success');
             });
         });
         
@@ -705,7 +1138,76 @@
                 titleElement.textContent = titleElement.getAttribute('data-ar');
             }
         }
-        
+
+        // Theme Toggle Functionality
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
+        setTheme(savedTheme);
+
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                setTheme(theme);
+                localStorage.setItem('selectedTheme', theme);
+                const lang = body.classList.contains('en') ? 'en' : 'ar';
+                const message = theme === 'light' ? 
+                    (lang === 'ar' ? 'تم تفعيل الوضع النهاري' : 'Light mode activated') :
+                    (lang === 'ar' ? 'تم تفعيل الوضع الليلي' : 'Dark mode activated');
+                showNotification(message, 'success');
+            });
+        });
+
+        function setTheme(theme) {
+            themeButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
+            
+            if (theme === 'light') {
+                body.classList.add('light-theme');
+            } else {
+                body.classList.remove('light-theme');
+            }
+        }
+
+        // Typewriter Effect
+        function typeWriter(element, text, speed = 50) {
+            element.classList.add('typewriter');
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Remove cursor after typing is complete
+                    setTimeout(() => {
+                        element.classList.remove('typewriter');
+                    }, 2000);
+                }
+            }
+            type();
+        }
+
+        // Apply typewriter effect to hero title
+        const heroTitle = document.querySelector('.hero h1');
+        const currentLang = body.classList.contains('en') ? 'en' : 'ar';
+        const titleText = heroTitle.getAttribute(`data-${currentLang}`);
+        typeWriter(heroTitle, titleText);
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.progress').style.width = scrollPercent + '%';
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -773,6 +1275,50 @@
         }, observerOptions);
 
         statsObserver.observe(statsSection);
+
+        // Interactive Skills Map
+        document.querySelectorAll('.skill-bubble').forEach(bubble => {
+            bubble.addEventListener('click', function() {
+                const skill = this.getAttribute('data-skill');
+                const level = this.getAttribute('data-level');
+                const lang = body.classList.contains('en') ? 'en' : 'ar';
+                const message = lang === 'ar' ? 
+                    `مستوى ${skill}: ${level}%` : 
+                    `${skill} Level: ${level}%`;
+                showNotification(message, 'success');
+            });
+        });
+
+        // Notification System
+        function showNotification(message, type = 'success') {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Welcome message on page load
+        window.addEventListener('load', () => {
+            const lang = body.classList.contains('en') ? 'en' : 'ar';
+            const message = lang === 'ar' ? 'مرحباً بك في صفحتي!' : 'Welcome to my page!';
+            setTimeout(() => {
+                showNotification(message, 'success');
+            }, 1000);
+        });
     </script>
 </body>
 </html>
