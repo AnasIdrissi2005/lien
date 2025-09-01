@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركزي الرقمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title data-ar="مركزي الرقمي" data-en="My Digital Hub">مركزي الرقمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -29,6 +29,50 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: font-family 0.3s ease;
+        }
+
+        body.en {
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        body.en .lang-toggle {
+            right: auto;
+            left: 20px;
+        }
+
+        .lang-option {
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+
+        .lang-option.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(106, 17, 203, 0.3);
         }
 
         /* Header */
@@ -80,11 +124,18 @@
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             transition: width 0.3s ease;
+        }
+
+        body:not(.en) nav a::after {
+            left: 0;
+        }
+
+        body.en nav a::after {
+            right: 0;
         }
 
         nav a:hover::after {
@@ -217,6 +268,15 @@
             height: 100%;
             background: rgba(255, 255, 255, 0.2);
             transition: left 0.5s ease;
+        }
+
+        body.en .link-btn::before {
+            left: auto;
+            right: -100%;
+        }
+
+        body.en .link-btn:hover::before {
+            right: 100%;
         }
 
         .link-btn:hover::before {
@@ -433,10 +493,26 @@
             .stats-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+            }
+            
+            body.en .lang-toggle {
+                right: auto;
+                left: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-option active" data-lang="ar">عربي</button>
+        <button class="lang-option" data-lang="en">EN</button>
+    </div>
+
     <!-- Floating Background Elements -->
     <div class="floating-shapes">
         <div class="shape shape-1"></div>
@@ -449,13 +525,13 @@
         <div class="header-container">
             <div class="logo">
                 <i class="fas fa-code"></i>
-                <span>مركزي الرقمي</span>
+                <span data-ar="مركزي الرقمي" data-en="My Digital Hub">مركزي الرقمي</span>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#about">من أنا</a></li>
-                    <li><a href="#skills">المهارات</a></li>
+                    <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                    <li><a href="#about" data-ar="من أنا" data-en="About">من أنا</a></li>
+                    <li><a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a></li>
                 </ul>
             </nav>
         </div>
@@ -463,8 +539,10 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>مرحباً في عالمي الرقمي</h1>
-        <p>أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا</p>
+        <h1 data-ar="مرحباً في عالمي الرقمي" data-en="Welcome to My Digital World">مرحباً في عالمي الرقمي</h1>
+        <p data-ar="أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا" 
+           data-en="I'm a passionate developer and designer, offering creative and innovative solutions in the world of technology">
+           أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا</p>
     </section>
 
     <!-- Main Links Section -->
@@ -472,22 +550,28 @@
         <!-- Link 1 -->
         <div class="link-card">
             <i class="fas fa-code link-icon"></i>
-            <h2 class="link-title">معرض الأكواد</h2>
-            <p class="link-description">استعرض مجموعتي من المشاريع البرمجية المبتكرة والأكواد الإبداعية</p>
+            <h2 class="link-title" data-ar="معرض الأكواد" data-en="Code Gallery">معرض الأكواد</h2>
+            <p class="link-description" data-ar="استعرض مجموعتي من المشاريع البرمجية المبتكرة والأكواد الإبداعية" 
+               data-en="Browse my collection of innovative programming projects and creative code">
+               استعرض مجموعتي من المشاريع البرمجية المبتكرة والأكواد الإبداعية</p>
             <div class="link-url">https://anasidrissi2005.github.io/-Code-Gallery/</div>
             <a href="https://anasidrissi2005.github.io/-Code-Gallery/" class="link-btn" target="_blank">
-                زيارة المعرض <i class="fas fa-arrow-left"></i>
+                <span data-ar="زيارة المعرض" data-en="Visit Gallery">زيارة المعرض</span> 
+                <i class="fas fa-arrow-left"></i>
             </a>
         </div>
         
         <!-- Link 2 -->
         <div class="link-card">
             <i class="fas fa-mobile-alt link-icon"></i>
-            <h2 class="link-title">مكتبة التطبيقات</h2>
-            <p class="link-description">اكتشف تطبيقاتي الجاهزة للاستخدام في مختلف المجالات التقنية</p>
+            <h2 class="link-title" data-ar="مكتبة التطبيقات" data-en="App Library">مكتبة التطبيقات</h2>
+            <p class="link-description" data-ar="اكتشف تطبيقاتي الجاهزة للاستخدام في مختلف المجالات التقنية" 
+               data-en="Discover my ready-to-use applications across various technical fields">
+               اكتشف تطبيقاتي الجاهزة للاستخدام في مختلف المجالات التقنية</p>
             <div class="link-url">https://anasidrissi2005.github.io/app-library/</div>
             <a href="https://anasidrissi2005.github.io/app-library/" class="link-btn" target="_blank">
-                زيارة المكتبة <i class="fas fa-arrow-left"></i>
+                <span data-ar="زيارة المكتبة" data-en="Visit Library">زيارة المكتبة</span> 
+                <i class="fas fa-arrow-left"></i>
             </a>
         </div>
     </section>
@@ -497,26 +581,26 @@
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-number">50+</div>
-                <div class="stat-label">مشروع مكتمل</div>
+                <div class="stat-label" data-ar="مشروع مكتمل" data-en="Projects Completed">مشروع مكتمل</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">30+</div>
-                <div class="stat-label">تطبيق مطور</div>
+                <div class="stat-label" data-ar="تطبيق مطور" data-en="Apps Developed">تطبيق مطور</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">1000+</div>
-                <div class="stat-label">سطر كود</div>
+                <div class="stat-label" data-ar="سطر كود" data-en="Lines of Code">سطر كود</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">24/7</div>
-                <div class="stat-label">دعم فني</div>
+                <div class="stat-label" data-ar="دعم فني" data-en="Support">دعم فني</div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section class="skills-section" id="skills">
-        <h2 class="section-title">مهاراتي التقنية</h2>
+        <h2 class="section-title" data-ar="مهاراتي التقنية" data-en="My Technical Skills">مهاراتي التقنية</h2>
         <div class="skills-grid">
             <div class="skill-item">
                 <i class="fab fa-html5 skill-icon"></i>
@@ -544,21 +628,21 @@
 
     <!-- Social Links -->
     <section class="social-section">
-        <h2 class="section-title">تابعني على</h2>
+        <h2 class="section-title" data-ar="تابعني على" data-en="Follow Me On">تابعني على</h2>
         <div class="social-links">
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" title="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" title="Twitter">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="social-link">
+            <a href="#" class="social-link" title="YouTube">
                 <i class="fab fa-youtube"></i>
             </a>
         </div>
@@ -566,10 +650,62 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 مركزي الرقمي - جميع الحقوق محفوظة</p>
+        <p data-ar="© 2023 مركزي الرقمي - جميع الحقوق محفوظة" 
+           data-en="© 2023 My Digital Hub - All Rights Reserved">
+           © 2023 مركزي الرقمي - جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
+        // Language Toggle Functionality
+        const langOptions = document.querySelectorAll('.lang-option');
+        const body = document.body;
+        
+        // Load saved language
+        const savedLang = localStorage.getItem('selectedLang') || 'ar';
+        setLanguage(savedLang);
+        
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                setLanguage(lang);
+                localStorage.setItem('selectedLang', lang);
+            });
+        });
+        
+        function setLanguage(lang) {
+            // Update active button
+            langOptions.forEach(opt => opt.classList.remove('active'));
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+            
+            // Update body class
+            if (lang === 'en') {
+                body.classList.add('en');
+                body.setAttribute('lang', 'en');
+                body.setAttribute('dir', 'ltr');
+            } else {
+                body.classList.remove('en');
+                body.setAttribute('lang', 'ar');
+                body.setAttribute('dir', 'rtl');
+            }
+            
+            // Update all translatable content
+            document.querySelectorAll('[data-ar]').forEach(element => {
+                if (lang === 'en' && element.hasAttribute('data-en')) {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-ar');
+                }
+            });
+            
+            // Update page title
+            const titleElement = document.querySelector('title');
+            if (lang === 'en' && titleElement.hasAttribute('data-en')) {
+                titleElement.textContent = titleElement.getAttribute('data-en');
+            } else {
+                titleElement.textContent = titleElement.getAttribute('data-ar');
+            }
+        }
+        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
