@@ -12,7 +12,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --primary: #6a11cb;
             --secondary: #2575fc;
@@ -24,7 +23,6 @@
             --text-secondary: rgba(255, 255, 255, 0.8);
             --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
         }
-
         /* Light Theme Variables */
         body.light-theme {
             --primary: #6a11cb;
@@ -37,7 +35,6 @@
             --text-secondary: rgba(0, 0, 0, 0.7);
             --bg-primary: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
         }
-
         body {
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-primary);
@@ -47,12 +44,10 @@
             position: relative;
             transition: all 0.3s ease;
         }
-
         body.en {
             font-family: 'Inter', sans-serif;
             direction: ltr;
         }
-
         /* Progress Bar */
         .progress-bar {
             position: fixed;
@@ -63,18 +58,15 @@
             background: rgba(255,255,255,0.1);
             z-index: 9999;
         }
-
         body.light-theme .progress-bar {
             background: rgba(0,0,0,0.1);
         }
-
         .progress {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             width: 0%;
             transition: width 0.3s ease;
         }
-
         /* Language & Theme Toggles */
         .controls {
             position: fixed;
@@ -85,12 +77,10 @@
             gap: 10px;
             align-items: center;
         }
-
         body.en .controls {
             right: auto;
             left: 20px;
         }
-
         .lang-toggle, .theme-toggle {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -101,12 +91,10 @@
             align-items: center;
             gap: 5px;
         }
-
         body.light-theme .lang-toggle,
         body.light-theme .theme-toggle {
             border: 1px solid rgba(0, 0, 0, 0.2);
         }
-
         .lang-option, .theme-btn {
             padding: 8px 16px;
             border-radius: 20px;
@@ -118,13 +106,172 @@
             color: var(--text-primary);
             font-size: 0.9rem;
         }
-
         .lang-option.active, .theme-btn.active {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             box-shadow: 0 2px 10px rgba(106, 17, 203, 0.3);
             color: white;
         }
-
+        /* Device Info Panel */
+        .device-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            z-index: 1000;
+            max-width: 300px;
+            transition: all 0.3s ease;
+            transform: translateY(calc(100% + 30px));
+        }
+        body.en .device-info {
+            left: auto;
+            right: 20px;
+        }
+        .device-info.visible {
+            transform: translateY(0);
+        }
+        .device-info-toggle {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .device-info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .device-info-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .device-info-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .device-info-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .device-info-item {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .device-info-label {
+            font-weight: 500;
+        }
+        .device-info-value {
+            text-align: left;
+        }
+        body.en .device-info-value {
+            text-align: right;
+        }
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        body.en .connection-status {
+            right: auto;
+            left: 20px;
+        }
+        .connection-status.online {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        .connection-status.offline {
+            border-color: #f44336;
+            color: #f44336;
+        }
+        /* Battery Status */
+        .battery-status {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        body.en .battery-status {
+            right: auto;
+            left: 20px;
+        }
+        .battery-icon {
+            position: relative;
+            width: 25px;
+            height: 15px;
+            border: 1px solid currentColor;
+            border-radius: 3px;
+        }
+        .battery-icon::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 3px;
+            width: 3px;
+            height: 9px;
+            background: currentColor;
+            border-radius: 0 2px 2px 0;
+        }
+        body.en .battery-icon::after {
+            right: auto;
+            left: -4px;
+            border-radius: 2px 0 0 2px;
+        }
+        .battery-fill {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            height: calc(100% - 2px);
+            background: currentColor;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        body.en .battery-fill {
+            left: auto;
+            right: 1px;
+        }
         /* Header */
         header {
             position: fixed;
@@ -137,12 +284,10 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
-
         body.light-theme header {
             background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-
         .header-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -150,7 +295,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -161,13 +305,11 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         nav ul {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
-
         nav a {
             color: var(--text-primary);
             text-decoration: none;
@@ -175,7 +317,6 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
         nav a::after {
             content: '';
             position: absolute;
@@ -185,19 +326,15 @@
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             transition: width 0.3s ease;
         }
-
         body:not(.en) nav a::after {
             left: 0;
         }
-
         body.en nav a::after {
             right: 0;
         }
-
         nav a:hover::after {
             width: 100%;
         }
-
         /* Hero Section with Parallax */
         .hero {
             margin-top: 80px;
@@ -213,7 +350,6 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-
         .hero::before {
             content: '';
             position: absolute;
@@ -224,16 +360,13 @@
             background: rgba(15, 12, 41, 0.7);
             z-index: 1;
         }
-
         body.light-theme .hero::before {
             background: rgba(255, 255, 255, 0.9);
         }
-
         .hero-content {
             position: relative;
             z-index: 2;
         }
-
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
@@ -242,7 +375,6 @@
             -webkit-text-fill-color: transparent;
             min-height: 1.2em;
         }
-
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
@@ -250,18 +382,22 @@
             opacity: 0.9;
             color: var(--text-secondary);
         }
-
+        /* Device-specific hero adjustments */
+        body.mobile .hero h1 {
+            font-size: 2.5rem;
+        }
+        body.tablet .hero h1 {
+            font-size: 3rem;
+        }
         /* Typewriter cursor */
         .typewriter::after {
             content: '|';
             animation: blink 1s infinite;
         }
-
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
-
         /* Main Links Section */
         .main-links {
             max-width: 1200px;
@@ -272,7 +408,13 @@
             gap: 3rem;
             margin-bottom: 4rem;
         }
-
+        /* Device-specific grid adjustments */
+        body.mobile .main-links {
+            grid-template-columns: 1fr;
+        }
+        body.tablet .main-links {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
         .link-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -282,12 +424,11 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
-
         body.light-theme .link-card {
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         .link-card::before {
             content: '';
             position: absolute;
@@ -300,16 +441,17 @@
             transition: opacity 0.4s ease;
             z-index: -1;
         }
-
         .link-card:hover::before {
             opacity: 0.1;
         }
-
         .link-card:hover {
             transform: translateY(-15px) scale(1.03);
             box-shadow: 0 20px 40px rgba(106, 17, 203, 0.3);
         }
-
+        /* Touch device feedback */
+        body.touch .link-card:active {
+            transform: scale(0.98);
+        }
         .link-icon {
             font-size: 4rem;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -317,20 +459,17 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
         }
-
         .link-title {
             font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--text-primary);
         }
-
         .link-description {
             opacity: 0.8;
             margin-bottom: 2rem;
             line-height: 1.6;
             color: var(--text-secondary);
         }
-
         .link-url {
             background: rgba(255, 255, 255, 0.1);
             padding: 0.8rem;
@@ -341,11 +480,9 @@
             word-break: break-all;
             color: var(--text-secondary);
         }
-
         body.light-theme .link-url {
             background: rgba(0, 0, 0, 0.05);
         }
-
         .link-btn {
             display: inline-block;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -358,7 +495,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .link-btn::before {
             content: '';
             position: absolute;
@@ -369,39 +505,39 @@
             background: rgba(255, 255, 255, 0.2);
             transition: left 0.5s ease;
         }
-
         body.en .link-btn::before {
             left: auto;
             right: -100%;
         }
-
         body.en .link-btn:hover::before {
             right: 100%;
         }
-
         .link-btn:hover::before {
             left: 100%;
         }
-
         .link-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
         }
-
         /* Recent Projects Section */
         .recent-projects {
             padding: 4rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .projects-slider {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-
+        /* Device-specific grid adjustments */
+        body.mobile .projects-slider {
+            grid-template-columns: 1fr;
+        }
+        body.tablet .projects-slider {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
         .project-card {
             background: var(--card-bg);
             border-radius: 15px;
@@ -409,16 +545,17 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         body.light-theme .project-card {
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
+        /* Touch device feedback */
+        body.touch .project-card:active {
+            transform: scale(0.98);
+        }
         .project-image {
             height: 200px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -428,27 +565,22 @@
             font-size: 3rem;
             color: rgba(255, 255, 255, 0.7);
         }
-
         .project-content {
             padding: 1.5rem;
         }
-
         .project-content h3 {
             margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
-
         .project-content p {
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
-
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-
         .project-tag {
             background: rgba(106, 17, 203, 0.2);
             color: var(--accent);
@@ -456,18 +588,15 @@
             border-radius: 20px;
             font-size: 0.8rem;
         }
-
         /* Stats Section */
         .stats-section {
             padding: 4rem 5%;
             background: rgba(0, 0, 0, 0.2);
             margin: 4rem 0;
         }
-
         body.light-theme .stats-section {
             background: rgba(0, 0, 0, 0.05);
         }
-
         .stats-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -476,11 +605,13 @@
             gap: 2rem;
             text-align: center;
         }
-
+        /* Device-specific grid adjustments */
+        body.mobile .stats-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
         .stat-card {
             padding: 2rem;
         }
-
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
@@ -489,25 +620,28 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
-
         .stat-label {
             color: var(--text-secondary);
         }
-
         /* Skills Map Section */
         .skills-map {
             padding: 4rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .skills-visualization {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-
+        /* Device-specific grid adjustments */
+        body.mobile .skills-visualization {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        body.tablet .skills-visualization {
+            grid-template-columns: repeat(3, 1fr);
+        }
         .skill-bubble {
             position: relative;
             background: var(--card-bg);
@@ -522,23 +656,23 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-
         body.light-theme .skill-bubble {
             border: 2px solid rgba(0, 0, 0, 0.1);
         }
-
         .skill-bubble:hover {
             transform: scale(1.1);
             border-color: var(--primary);
         }
-
+        /* Touch device feedback */
+        body.touch .skill-bubble:active {
+            transform: scale(0.95);
+        }
         .skill-bubble span {
             font-weight: 600;
             color: var(--text-primary);
             z-index: 2;
             position: relative;
         }
-
         .bubble-fill {
             position: absolute;
             bottom: 0;
@@ -548,14 +682,12 @@
             border-radius: 50%;
             transition: height 0.5s ease;
         }
-
         /* Skills Section */
         .skills-section {
             padding: 4rem 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -564,13 +696,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 2rem;
         }
-
+        /* Device-specific grid adjustments */
+        body.mobile .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        body.tablet .skills-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
         .skill-item {
             text-align: center;
             padding: 2rem;
@@ -579,26 +716,25 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
-
         body.light-theme .skill-item {
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         .skill-item:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.08);
         }
-
         body.light-theme .skill-item:hover {
             background: rgba(0, 0, 0, 0.05);
         }
-
+        /* Touch device feedback */
+        body.touch .skill-item:active {
+            transform: scale(0.98);
+        }
         .skill-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent);
         }
-
         /* Python Icon Special Style */
         .python-icon {
             background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
@@ -606,7 +742,6 @@
             -webkit-text-fill-color: transparent;
             position: relative;
         }
-
         .python-icon::before {
             content: '';
             position: absolute;
@@ -619,7 +754,6 @@
             opacity: 0.2;
             z-index: -1;
         }
-
         /* Godot Icon Special Style */
         .godot-icon {
             background: linear-gradient(135deg, #478cbf 0%, #2e7d32 100%);
@@ -627,7 +761,6 @@
             -webkit-text-fill-color: transparent;
             position: relative;
         }
-
         .godot-icon::before {
             content: '';
             position: absolute;
@@ -640,20 +773,17 @@
             opacity: 0.2;
             z-index: -1;
         }
-
         /* Social Links */
         .social-section {
             padding: 3rem 5%;
             text-align: center;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
             margin-top: 2rem;
         }
-
         .social-link {
             width: 50px;
             height: 50px;
@@ -667,17 +797,91 @@
             font-size: 1.5rem;
             transition: all 0.3s ease;
         }
-
         body.light-theme .social-link {
             border: 1px solid rgba(0, 0, 0, 0.2);
         }
-
         .social-link:hover {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             transform: translateY(-5px);
             color: white;
         }
-
+        /* Touch device feedback */
+        body.touch .social-link:active {
+            transform: scale(0.95);
+        }
+        /* Device Features Section */
+        .device-features {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        /* Device-specific grid adjustments */
+        body.mobile .features-grid {
+            grid-template-columns: 1fr;
+        }
+        body.tablet .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        body.light-theme .feature-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        body.light-theme .feature-card:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        /* Touch device feedback */
+        body.touch .feature-card:active {
+            transform: scale(0.98);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .feature-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .feature-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .feature-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        /* Touch device feedback */
+        body.touch .feature-btn:active {
+            transform: scale(0.95);
+        }
         /* Floating Elements */
         .floating-shapes {
             position: fixed;
@@ -688,13 +892,11 @@
             z-index: -1;
             overflow: hidden;
         }
-
         .shape {
             position: absolute;
             opacity: 0.05;
             animation: float 15s infinite ease-in-out;
         }
-
         .shape-1 {
             top: 10%;
             left: 5%;
@@ -704,7 +906,6 @@
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation-delay: 0s;
         }
-
         .shape-2 {
             top: 60%;
             right: 10%;
@@ -714,7 +915,6 @@
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation-delay: 2s;
         }
-
         .shape-3 {
             bottom: 15%;
             left: 15%;
@@ -724,12 +924,10 @@
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation-delay: 5s;
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(10deg); }
         }
-
         /* Notifications */
         .notification {
             position: fixed;
@@ -747,31 +945,30 @@
             z-index: 10000;
             animation: slideIn 0.3s ease;
         }
-
         body.light-theme .notification {
             border: 1px solid rgba(0, 0, 0, 0.2);
         }
-
         .notification.success {
             border-color: #4caf50;
         }
-
         .notification.error {
             border-color: #f44336;
         }
-
+        .notification.info {
+            border-color: #2196f3;
+        }
         .notification i {
             font-size: 1.5rem;
         }
-
         .notification.success i {
             color: #4caf50;
         }
-
         .notification.error i {
             color: #f44336;
         }
-
+        .notification.info i {
+            color: #2196f3;
+        }
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -782,7 +979,6 @@
                 transform: translate(-50%, 0);
             }
         }
-
         @keyframes slideOut {
             from {
                 opacity: 1;
@@ -793,7 +989,6 @@
                 transform: translate(-50%, -20px);
             }
         }
-
         /* Footer */
         footer {
             text-align: center;
@@ -801,11 +996,9 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 4rem;
         }
-
         body.light-theme footer {
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -842,7 +1035,6 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
-
     <!-- Language & Theme Toggles -->
     <div class="controls">
         <div class="lang-toggle">
@@ -858,14 +1050,66 @@
             </button>
         </div>
     </div>
-
+    <!-- Device Info Panel -->
+    <div class="device-info" id="deviceInfo">
+        <button class="device-info-toggle" id="deviceInfoToggle">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <div class="device-info-header">
+            <span class="device-info-title" data-ar="معلومات الجهاز" data-en="Device Info">معلومات الجهاز</span>
+            <button class="device-info-close" id="deviceInfoClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="device-info-content">
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="نوع الجهاز" data-en="Device Type">نوع الجهاز:</span>
+                <span class="device-info-value" id="deviceType">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="نظام التشغيل" data-en="OS">نظام التشغيل:</span>
+                <span class="device-info-value" id="deviceOS">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="المتصفح" data-en="Browser">المتصفح:</span>
+                <span class="device-info-value" id="deviceBrowser">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="دعم اللمس" data-en="Touch Support">دعم اللمس:</span>
+                <span class="device-info-value" id="touchSupport">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="دعم الاهتزاز" data-en="Vibration Support">دعم الاهتزاز:</span>
+                <span class="device-info-value" id="vibrationSupport">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="دعم الكاميرا" data-en="Camera Support">دعم الكاميرا:</span>
+                <span class="device-info-value" id="cameraSupport">-</span>
+            </div>
+            <div class="device-info-item">
+                <span class="device-info-label" data-ar="دعم الموقع" data-en="Location Support">دعم الموقع:</span>
+                <span class="device-info-value" id="locationSupport">-</span>
+            </div>
+        </div>
+    </div>
+    <!-- Connection Status -->
+    <div class="connection-status online" id="connectionStatus">
+        <i class="fas fa-wifi"></i>
+        <span data-ar="متصل" data-en="Online">متصل</span>
+    </div>
+    <!-- Battery Status -->
+    <div class="battery-status" id="batteryStatus" style="display: none;">
+        <div class="battery-icon">
+            <div class="battery-fill" id="batteryFill"></div>
+        </div>
+        <span id="batteryLevel">-</span>
+    </div>
     <!-- Floating Background Elements -->
     <div class="floating-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
     </div>
-
     <!-- Header -->
     <header>
         <div class="header-container">
@@ -878,12 +1122,12 @@
                     <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
                     <li><a href="#projects" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
                     <li><a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+                    <li><a href="#device-features" data-ar="ميزات الجهاز" data-en="Device Features">ميزات الجهاز</a></li>
                     <li><a href="#contact" data-ar="اتصل" data-en="Contact">اتصل</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <!-- Hero Section with Parallax -->
     <section class="hero" id="home">
         <div class="hero-content">
@@ -893,11 +1137,10 @@
                أنا مطور شغوف بالبرمجة والتصميم، أقدم حلولاً إبداعية ومبتكرة في عالم التكنولوجيا</p>
         </div>
     </section>
-
     <!-- Main Links Section -->
     <section class="main-links">
         <!-- Link 1 -->
-        <div class="link-card">
+        <div class="link-card" data-haptic="medium">
             <i class="fas fa-code link-icon"></i>
             <h2 class="link-title" data-ar="معرض الأكواد" data-en="Code Gallery">معرض الأكواد</h2>
             <p class="link-description" data-ar="استعرض مجموعتي من المشاريع البرمجية المبتكرة والأكواد الإبداعية" 
@@ -911,7 +1154,7 @@
         </div>
         
         <!-- Link 2 -->
-        <div class="link-card">
+        <div class="link-card" data-haptic="medium">
             <i class="fas fa-mobile-alt link-icon"></i>
             <h2 class="link-title" data-ar="مكتبة التطبيقات" data-en="App Library">مكتبة التطبيقات</h2>
             <p class="link-description" data-ar="اكتشف تطبيقاتي الجاهزة للاستخدام في مختلف المجالات التقنية" 
@@ -924,12 +1167,11 @@
             </a>
         </div>
     </section>
-
     <!-- Recent Projects Section -->
     <section class="recent-projects" id="projects">
         <h2 class="section-title" data-ar="آخر المشاريع" data-en="Recent Projects">آخر المشاريع</h2>
         <div class="projects-slider">
-            <div class="project-card">
+            <div class="project-card" data-haptic="light">
                 <div class="project-image">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
@@ -946,7 +1188,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card" data-haptic="light">
                 <div class="project-image">
                     <i class="fas fa-gamepad"></i>
                 </div>
@@ -963,7 +1205,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card" data-haptic="light">
                 <div class="project-image">
                     <i class="fas fa-chart-line"></i>
                 </div>
@@ -981,7 +1223,6 @@
             </div>
         </div>
     </section>
-
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="stats-container">
@@ -1003,91 +1244,433 @@
             </div>
         </div>
     </section>
-
     <!-- Skills Map Section -->
     <section class="skills-map">
         <h2 class="section-title" data-ar="خريطة المهارات" data-en="Skills Map">خريطة المهارات</h2>
         <div class="skills-visualization">
-            <div class="skill-bubble" data-skill="HTML5" data-level="95">
+            <div class="skill-bubble" data-skill="HTML5" data-level="95" data-haptic="light">
                 <span>HTML5</span>
                 <div class="bubble-fill" style="height: 95%;"></div>
             </div>
-            <div class="skill-bubble" data-skill="CSS3" data-level="90">
+            <div class="skill-bubble" data-skill="CSS3" data-level="90" data-haptic="light">
                 <span>CSS3</span>
                 <div class="bubble-fill" style="height: 90%;"></div>
             </div>
-            <div class="skill-bubble" data-skill="JavaScript" data-level="85">
+            <div class="skill-bubble" data-skill="JavaScript" data-level="85" data-haptic="light">
                 <span>JavaScript</span>
                 <div class="bubble-fill" style="height: 85%;"></div>
             </div>
-            <div class="skill-bubble" data-skill="Python" data-level="80">
+            <div class="skill-bubble" data-skill="Python" data-level="80" data-haptic="light">
                 <span>Python</span>
                 <div class="bubble-fill" style="height: 80%;"></div>
             </div>
-            <div class="skill-bubble" data-skill="Godot" data-level="70">
+            <div class="skill-bubble" data-skill="Godot" data-level="70" data-haptic="light">
                 <span>Godot</span>
                 <div class="bubble-fill" style="height: 70%;"></div>
             </div>
         </div>
     </section>
-
     <!-- Skills Section -->
     <section class="skills-section" id="skills">
         <h2 class="section-title" data-ar="مهاراتي التقنية" data-en="My Technical Skills">مهاراتي التقنية</h2>
         <div class="skills-grid">
-            <div class="skill-item">
+            <div class="skill-item" data-haptic="light">
                 <i class="fab fa-html5 skill-icon"></i>
                 <h3>HTML5</h3>
             </div>
-            <div class="skill-item">
+            <div class="skill-item" data-haptic="light">
                 <i class="fab fa-css3-alt skill-icon"></i>
                 <h3>CSS3</h3>
             </div>
-            <div class="skill-item">
+            <div class="skill-item" data-haptic="light">
                 <i class="fab fa-js skill-icon"></i>
                 <h3>JavaScript</h3>
             </div>
-            <div class="skill-item">
+            <div class="skill-item" data-haptic="light">
                 <i class="fab fa-python skill-icon"></i>
                 <h3>Python</h3>
             </div>
-            <div class="skill-item">
+            <div class="skill-item" data-haptic="light">
                 <i class="fas fa-cube skill-icon godot-icon"></i>
                 <h3>Godot</h3>
             </div>
         </div>
     </section>
-
+    <!-- Device Features Section -->
+    <section class="device-features" id="device-features">
+        <h2 class="section-title" data-ar="ميزات الجهاز" data-en="Device Features">ميزات الجهاز</h2>
+        <div class="features-grid">
+            <div class="feature-card" id="vibrationCard" style="display: none;" data-haptic="medium">
+                <i class="fas fa-mobile-alt feature-icon"></i>
+                <h3 class="feature-title" data-ar="اهتزاز الجهاز" data-en="Device Vibration">اهتزاز الجهاز</h3>
+                <p class="feature-description" data-ar="اختبار قدرة الجهاز على الاهتزاز" 
+                   data-en="Test the device's vibration capability">
+                   اختبار قدرة الجهاز على الاهتزاز</p>
+                <button class="feature-btn" id="vibrateBtn" data-ar="اهتزاز" data-en="Vibrate">اهتزاز</button>
+            </div>
+            
+            <div class="feature-card" id="cameraCard" style="display: none;" data-haptic="medium">
+                <i class="fas fa-camera feature-icon"></i>
+                <h3 class="feature-title" data-ar="الكاميرا" data-en="Camera">الكاميرا</h3>
+                <p class="feature-description" data-ar="الوصول إلى كاميرا الجهاز" 
+                   data-en="Access the device's camera">
+                   الوصول إلى كاميرا الجهاز</p>
+                <button class="feature-btn" id="cameraBtn" data-ar="فتح الكاميرا" data-en="Open Camera">فتح الكاميرا</button>
+            </div>
+            
+            <div class="feature-card" id="locationCard" style="display: none;" data-haptic="medium">
+                <i class="fas fa-map-marker-alt feature-icon"></i>
+                <h3 class="feature-title" data-ar="الموقع الجغرافي" data-en="Geolocation">الموقع الجغرافي</h3>
+                <p class="feature-description" data-ar="الحصول على موقعك الحالي" 
+                   data-en="Get your current location">
+                   الحصول على موقعك الحالي</p>
+                <button class="feature-btn" id="locationBtn" data-ar="احصل على الموقع" data-en="Get Location">احصل على الموقع</button>
+            </div>
+            
+            <div class="feature-card" id="orientationCard" data-haptic="medium">
+                <i class="fas fa-compass feature-icon"></i>
+                <h3 class="feature-title" data-ar="اتجاه الجهاز" data-en="Device Orientation">اتجاه الجهاز</h3>
+                <p class="feature-description" data-ar="كشف اتجاه الجهاز الحالي" 
+                   data-en="Detect the current device orientation">
+                   كشف اتجاه الجهاز الحالي</p>
+                <button class="feature-btn" id="orientationBtn" data-ar="كشف الاتجاه" data-en="Detect Orientation">كشف الاتجاه</button>
+            </div>
+        </div>
+    </section>
     <!-- Social Links -->
     <section class="social-section" id="contact">
         <h2 class="section-title" data-ar="تابعني على" data-en="Follow Me On">تابعني على</h2>
         <div class="social-links">
-            <a href="#" class="social-link" title="GitHub">
+            <a href="#" class="social-link" data-haptic="light" title="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="#" class="social-link" title="LinkedIn">
+            <a href="#" class="social-link" data-haptic="light" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="#" class="social-link" title="Twitter">
+            <a href="#" class="social-link" data-haptic="light" title="Twitter">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="#" class="social-link" title="Instagram">
+            <a href="#" class="social-link" data-haptic="light" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="social-link" title="YouTube">
+            <a href="#" class="social-link" data-haptic="light" title="YouTube">
                 <i class="fab fa-youtube"></i>
             </a>
         </div>
     </section>
-
     <!-- Footer -->
     <footer>
         <p data-ar="© 2025 مركزي الرقمي - جميع الحقوق محفوظة" 
            data-en="© 2025 My Digital Hub - All Rights Reserved">
            © 2025 مركزي الرقمي - جميع الحقوق محفوظة</p>
     </footer>
-
     <script>
+        // Device Detection
+        const deviceInfo = {
+            type: '',
+            os: '',
+            browser: '',
+            touchSupport: false,
+            vibrationSupport: false,
+            cameraSupport: false,
+            locationSupport: false
+        };
+
+        // Detect device type
+        function detectDeviceType() {
+            const userAgent = navigator.userAgent;
+            if (/tablet|ipad|playbook|silk/i.test(userAgent)) {
+                deviceInfo.type = 'tablet';
+                document.body.classList.add('tablet');
+            } else if (/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent)) {
+                deviceInfo.type = 'mobile';
+                document.body.classList.add('mobile');
+            } else {
+                deviceInfo.type = 'desktop';
+                document.body.classList.add('desktop');
+            }
+            return deviceInfo.type;
+        }
+
+        // Detect OS
+        function detectOS() {
+            const userAgent = navigator.userAgent;
+            if (/Windows/i.test(userAgent)) {
+                deviceInfo.os = 'Windows';
+            } else if (/Macintosh|Mac OS X/i.test(userAgent)) {
+                deviceInfo.os = 'macOS';
+            } else if (/Linux/i.test(userAgent)) {
+                deviceInfo.os = 'Linux';
+            } else if (/Android/i.test(userAgent)) {
+                deviceInfo.os = 'Android';
+            } else if (/iOS|iPhone|iPad|iPod/i.test(userAgent)) {
+                deviceInfo.os = 'iOS';
+            } else {
+                deviceInfo.os = 'Unknown';
+            }
+            return deviceInfo.os;
+        }
+
+        // Detect browser
+        function detectBrowser() {
+            const userAgent = navigator.userAgent;
+            if (/Chrome/i.test(userAgent) && !/Edg/i.test(userAgent)) {
+                deviceInfo.browser = 'Chrome';
+            } else if (/Firefox/i.test(userAgent)) {
+                deviceInfo.browser = 'Firefox';
+            } else if (/Safari/i.test(userAgent) && !/Chrome/i.test(userAgent)) {
+                deviceInfo.browser = 'Safari';
+            } else if (/Edg/i.test(userAgent)) {
+                deviceInfo.browser = 'Edge';
+            } else if (/Opera/i.test(userAgent)) {
+                deviceInfo.browser = 'Opera';
+            } else {
+                deviceInfo.browser = 'Unknown';
+            }
+            return deviceInfo.browser;
+        }
+
+        // Detect touch support
+        function detectTouchSupport() {
+            deviceInfo.touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (deviceInfo.touchSupport) {
+                document.body.classList.add('touch');
+            }
+            return deviceInfo.touchSupport;
+        }
+
+        // Detect vibration support
+        function detectVibrationSupport() {
+            deviceInfo.vibrationSupport = 'vibrate' in navigator;
+            return deviceInfo.vibrationSupport;
+        }
+
+        // Detect camera support
+        function detectCameraSupport() {
+            deviceInfo.cameraSupport = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+            return deviceInfo.cameraSupport;
+        }
+
+        // Detect location support
+        function detectLocationSupport() {
+            deviceInfo.locationSupport = 'geolocation' in navigator;
+            return deviceInfo.locationSupport;
+        }
+
+        // Update device info panel
+        function updateDeviceInfoPanel() {
+            document.getElementById('deviceType').textContent = deviceInfo.type;
+            document.getElementById('deviceOS').textContent = deviceInfo.os;
+            document.getElementById('deviceBrowser').textContent = deviceInfo.browser;
+            document.getElementById('touchSupport').textContent = deviceInfo.touchSupport ? '✓' : '✗';
+            document.getElementById('vibrationSupport').textContent = deviceInfo.vibrationSupport ? '✓' : '✗';
+            document.getElementById('cameraSupport').textContent = deviceInfo.cameraSupport ? '✓' : '✗';
+            document.getElementById('locationSupport').textContent = deviceInfo.locationSupport ? '✓' : '✗';
+        }
+
+        // Show/hide device features based on support
+        function updateDeviceFeatures() {
+            if (deviceInfo.vibrationSupport) {
+                document.getElementById('vibrationCard').style.display = 'block';
+            }
+            if (deviceInfo.cameraSupport) {
+                document.getElementById('cameraCard').style.display = 'block';
+            }
+            if (deviceInfo.locationSupport) {
+                document.getElementById('locationCard').style.display = 'block';
+            }
+        }
+
+        // Device info panel controls
+        const deviceInfoPanel = document.getElementById('deviceInfo');
+        const deviceInfoToggle = document.getElementById('deviceInfoToggle');
+        const deviceInfoClose = document.getElementById('deviceInfoClose');
+
+        deviceInfoToggle.addEventListener('click', () => {
+            deviceInfoPanel.classList.toggle('visible');
+            const icon = deviceInfoToggle.querySelector('i');
+            icon.classList.toggle('fa-chevron-up');
+            icon.classList.toggle('fa-chevron-down');
+        });
+
+        deviceInfoClose.addEventListener('click', () => {
+            deviceInfoPanel.classList.remove('visible');
+            const icon = deviceInfoToggle.querySelector('i');
+            icon.classList.add('fa-chevron-up');
+            icon.classList.remove('fa-chevron-down');
+        });
+
+        // Connection status
+        const connectionStatus = document.getElementById('connectionStatus');
+        
+        function updateConnectionStatus() {
+            if (navigator.onLine) {
+                connectionStatus.classList.remove('offline');
+                connectionStatus.classList.add('online');
+                connectionStatus.innerHTML = '<i class="fas fa-wifi"></i><span data-ar="متصل" data-en="Online">متصل</span>';
+            } else {
+                connectionStatus.classList.remove('online');
+                connectionStatus.classList.add('offline');
+                connectionStatus.innerHTML = '<i class="fas fa-wifi-slash"></i><span data-ar="غير متصل" data-en="Offline">غير متصل</span>';
+            }
+            updateLanguage();
+        }
+
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+
+        // Battery status
+        const batteryStatus = document.getElementById('batteryStatus');
+        const batteryFill = document.getElementById('batteryFill');
+        const batteryLevel = document.getElementById('batteryLevel');
+
+        function updateBatteryStatus(battery) {
+            const level = Math.round(battery.level * 100);
+            batteryLevel.textContent = level + '%';
+            batteryFill.style.height = level + '%';
+            
+            // Change color based on battery level
+            if (level <= 20) {
+                batteryFill.style.background = '#f44336'; // Red
+            } else if (level <= 50) {
+                batteryFill.style.background = '#ff9800'; // Orange
+            } else {
+                batteryFill.style.background = 'currentColor'; // Default
+            }
+        }
+
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(battery => {
+                updateBatteryStatus(battery);
+                batteryStatus.style.display = 'flex';
+                
+                battery.addEventListener('levelchange', () => {
+                    updateBatteryStatus(battery);
+                });
+            });
+        }
+
+        // Haptic feedback
+        function triggerHapticFeedback(type = 'light') {
+            if ('vibrate' in navigator) {
+                switch (type) {
+                    case 'light':
+                        navigator.vibrate(10);
+                        break;
+                    case 'medium':
+                        navigator.vibrate(20);
+                        break;
+                    case 'heavy':
+                        navigator.vibrate(30);
+                        break;
+                    case 'double':
+                        navigator.vibrate([15, 30, 15]);
+                        break;
+                    default:
+                        navigator.vibrate(10);
+                }
+            }
+        }
+
+        // Add haptic feedback to interactive elements
+        document.querySelectorAll('[data-haptic]').forEach(element => {
+            element.addEventListener('click', () => {
+                const hapticType = element.getAttribute('data-haptic');
+                triggerHapticFeedback(hapticType);
+            });
+        });
+
+        // Vibration feature
+        const vibrateBtn = document.getElementById('vibrateBtn');
+        if (vibrateBtn) {
+            vibrateBtn.addEventListener('click', () => {
+                triggerHapticFeedback('heavy');
+                const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                const message = lang === 'ar' ? 'تم تفعيل الاهتزاز' : 'Vibration activated';
+                showNotification(message, 'success');
+            });
+        }
+
+        // Camera feature
+        const cameraBtn = document.getElementById('cameraBtn');
+        if (cameraBtn) {
+            cameraBtn.addEventListener('click', async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                    const message = lang === 'ar' ? 'تم الوصول إلى الكاميرا بنجاح' : 'Camera access granted';
+                    showNotification(message, 'success');
+                    
+                    // Stop the stream after 3 seconds
+                    setTimeout(() => {
+                        stream.getTracks().forEach(track => track.stop());
+                    }, 3000);
+                } catch (error) {
+                    const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                    const message = lang === 'ar' ? 'فشل الوصول إلى الكاميرا' : 'Camera access denied';
+                    showNotification(message, 'error');
+                }
+            });
+        }
+
+        // Location feature
+        const locationBtn = document.getElementById('locationBtn');
+        if (locationBtn) {
+            locationBtn.addEventListener('click', () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            const { latitude, longitude } = position.coords;
+                            const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                            const message = lang === 'ar' 
+                                ? `الموقع: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}` 
+                                : `Location: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+                            showNotification(message, 'success');
+                        },
+                        error => {
+                            const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                            const message = lang === 'ar' ? 'فشل الحصول على الموقع' : 'Failed to get location';
+                            showNotification(message, 'error');
+                        }
+                    );
+                }
+            });
+        }
+
+        // Device orientation feature
+        const orientationBtn = document.getElementById('orientationBtn');
+        if (orientationBtn) {
+            orientationBtn.addEventListener('click', () => {
+                if (window.DeviceOrientationEvent) {
+                    const handleOrientation = (event) => {
+                        const { alpha, beta, gamma } = event;
+                        const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                        const message = lang === 'ar'
+                            ? `الاتجاه: α=${alpha?.toFixed(1) || 'N/A'}°, β=${beta?.toFixed(1) || 'N/A'}°, γ=${gamma?.toFixed(1) || 'N/A'}°`
+                            : `Orientation: α=${alpha?.toFixed(1) || 'N/A'}°, β=${beta?.toFixed(1) || 'N/A'}°, γ=${gamma?.toFixed(1) || 'N/A'}°`;
+                        showNotification(message, 'info');
+                        window.removeEventListener('deviceorientation', handleOrientation);
+                    };
+                    
+                    window.addEventListener('deviceorientation', handleOrientation);
+                    
+                    // Fallback if device orientation doesn't trigger
+                    setTimeout(() => {
+                        window.removeEventListener('deviceorientation', handleOrientation);
+                        const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                        const message = lang === 'ar' 
+                            ? `اتجاه الشاشة: ${window.orientation === 0 ? 'عمودي' : window.orientation === 90 || window.orientation === -90 ? 'أفقي' : 'مجهول'}`
+                            : `Screen orientation: ${window.orientation === 0 ? 'portrait' : window.orientation === 90 || window.orientation === -90 ? 'landscape' : 'unknown'}`;
+                        showNotification(message, 'info');
+                    }, 2000);
+                } else {
+                    const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+                    const message = lang === 'ar' ? 'الجهاز لا يدعم كشف الاتجاه' : 'Device does not support orientation detection';
+                    showNotification(message, 'error');
+                }
+            });
+        }
+
         // Language Toggle Functionality
         const langOptions = document.querySelectorAll('.lang-option');
         const body = document.body;
@@ -1138,12 +1721,23 @@
                 titleElement.textContent = titleElement.getAttribute('data-ar');
             }
         }
-
+        
+        function updateLanguage() {
+            const lang = body.classList.contains('en') ? 'en' : 'ar';
+            document.querySelectorAll('[data-ar]').forEach(element => {
+                if (lang === 'en' && element.hasAttribute('data-en')) {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-ar');
+                }
+            });
+        }
+        
         // Theme Toggle Functionality
         const themeButtons = document.querySelectorAll('.theme-btn');
         const savedTheme = localStorage.getItem('selectedTheme') || 'dark';
         setTheme(savedTheme);
-
+        
         themeButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const theme = btn.getAttribute('data-theme');
@@ -1156,7 +1750,7 @@
                 showNotification(message, 'success');
             });
         });
-
+        
         function setTheme(theme) {
             themeButtons.forEach(btn => btn.classList.remove('active'));
             document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
@@ -1167,7 +1761,23 @@
                 body.classList.remove('light-theme');
             }
         }
-
+        
+        // Auto-detect system theme preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            if (!localStorage.getItem('selectedTheme')) {
+                setTheme('light');
+            }
+        }
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+                if (!localStorage.getItem('selectedTheme')) {
+                    setTheme(e.matches ? 'light' : 'dark');
+                }
+            });
+        }
+        
         // Typewriter Effect
         function typeWriter(element, text, speed = 50) {
             element.classList.add('typewriter');
@@ -1188,26 +1798,26 @@
             }
             type();
         }
-
+        
         // Apply typewriter effect to hero title
         const heroTitle = document.querySelector('.hero h1');
         const currentLang = body.classList.contains('en') ? 'en' : 'ar';
         const titleText = heroTitle.getAttribute(`data-${currentLang}`);
         typeWriter(heroTitle, titleText);
-
+        
         // Progress Bar
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.querySelector('.progress').style.width = scrollPercent + '%';
         });
-
+        
         // Parallax Effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallax = document.querySelector('.hero');
             parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
-
+        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1221,13 +1831,13 @@
                 }
             });
         });
-
+        
         // Add animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
-
+        
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1236,7 +1846,7 @@
                 }
             });
         }, observerOptions);
-
+        
         // Observe all sections
         document.querySelectorAll('section').forEach(section => {
             section.style.opacity = '0';
@@ -1244,7 +1854,7 @@
             section.style.transition = 'all 0.6s ease';
             observer.observe(section);
         });
-
+        
         // Counter animation for stats
         function animateCounter(element, target) {
             let current = 0;
@@ -1259,7 +1869,7 @@
                 }
             }, 30);
         }
-
+        
         // Trigger counter animation when stats section is visible
         const statsSection = document.querySelector('.stats-section');
         const statsObserver = new IntersectionObserver(function(entries) {
@@ -1273,9 +1883,9 @@
                 }
             });
         }, observerOptions);
-
+        
         statsObserver.observe(statsSection);
-
+        
         // Interactive Skills Map
         document.querySelectorAll('.skill-bubble').forEach(bubble => {
             bubble.addEventListener('click', function() {
@@ -1288,7 +1898,7 @@
                 showNotification(message, 'success');
             });
         });
-
+        
         // Notification System
         function showNotification(message, type = 'success') {
             // Remove existing notification
@@ -1296,11 +1906,11 @@
             if (existingNotification) {
                 existingNotification.remove();
             }
-
+            
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
                 <span>${message}</span>
             `;
             document.body.appendChild(notification);
@@ -1310,15 +1920,97 @@
                 setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
-
-        // Welcome message on page load
+        
+        // Initialize device detection on page load
         window.addEventListener('load', () => {
+            detectDeviceType();
+            detectOS();
+            detectBrowser();
+            detectTouchSupport();
+            detectVibrationSupport();
+            detectCameraSupport();
+            detectLocationSupport();
+            
+            updateDeviceInfoPanel();
+            updateDeviceFeatures();
+            updateConnectionStatus();
+            
+            // Show device info panel after a short delay
+            setTimeout(() => {
+                deviceInfoPanel.classList.add('visible');
+                const icon = deviceInfoToggle.querySelector('i');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }, 2000);
+            
+            // Welcome message
             const lang = body.classList.contains('en') ? 'en' : 'ar';
-            const message = lang === 'ar' ? 'مرحباً بك في صفحتي!' : 'Welcome to my page!';
+            const deviceType = deviceInfo.type === 'mobile' ? (lang === 'ar' ? 'جوال' : 'mobile') :
+                              deviceInfo.type === 'tablet' ? (lang === 'ar' ? 'تابلت' : 'tablet') :
+                              (lang === 'ar' ? 'حاسوب' : 'desktop');
+            const message = lang === 'ar' ? 
+                `مرحباً بك في صفحتي من ${deviceType}!` : 
+                `Welcome to my page from ${deviceType}!`;
+            
             setTimeout(() => {
                 showNotification(message, 'success');
-            }, 1000);
+            }, 3000);
         });
+        
+        // Add swipe gestures for touch devices
+        if (deviceInfo.touchSupport) {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left (next section)
+                        const currentSection = getCurrentSection();
+                        const nextSection = currentSection.nextElementSibling;
+                        if (nextSection && nextSection.tagName === 'SECTION') {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    } else {
+                        // Swipe right (previous section)
+                        const currentSection = getCurrentSection();
+                        const prevSection = currentSection.previousElementSibling;
+                        if (prevSection && prevSection.tagName === 'SECTION') {
+                            prevSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                }
+            }
+            
+            function getCurrentSection() {
+                const scrollPosition = window.scrollY + window.innerHeight / 2;
+                const sections = document.querySelectorAll('section');
+                
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        return section;
+                    }
+                }
+                
+                return sections[0];
+            }
+        }
     </script>
 </body>
 </html>
